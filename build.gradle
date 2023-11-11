@@ -1,0 +1,14 @@
+dependencies {
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.31'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+ext {
+    description = 't'
+    url = 'https'
+    scm = 'test'
+}
+
+test {
+    useJUnitPlatform()
+}
