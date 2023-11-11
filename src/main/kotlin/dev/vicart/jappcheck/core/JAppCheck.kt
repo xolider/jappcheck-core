@@ -14,16 +14,31 @@ import java.net.URL
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
+/**
+ * Util class that verifies a provided token against Google App Check JWKS
+ * @author Clément Vicart
+ * @since 1.0
+ */
 object JAppCheck {
 
     private lateinit var jwks: JWKSet
     private lateinit var projectId: String
 
+    /**
+     * Sets the project ID and load JWKS set from Google
+     * @since 1.0
+     * @param projectId the firebase project ID
+     */
     fun initialize(projectId: String) {
         jwks = JWKSet.load(URL("https://firebaseappcheck.googleapis.com/v1/jwks"))
         this.projectId = projectId
     }
 
+    /**
+     * Checks the given token for App Check pass
+     * @param token App Check Token
+     * @since 1.0
+     */
     fun checkAppToken(token: String) {
         if(!this::jwks.isInitialized || !this::projectId.isInitialized) {
             throw JAppCheckNotInitializedException()
